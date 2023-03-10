@@ -1,3 +1,4 @@
+import logging
 import sys
 
 def error_messege_detail(error,error_detail:sys):
@@ -12,8 +13,18 @@ def error_messege_detail(error,error_detail:sys):
 
 class CustomException(Exception):
     def __init__(self,error_messege,error_detail:sys):
-        super.__init__(error_messege)
+        super().__init__(error_messege)
         self.error_messege = error_messege_detail(error_messege,error_detail=error_detail)
 
     def __str__(self):
         return self.error_messege
+
+
+
+if __name__ == "__main__":
+    
+    try:
+        a = 0/0
+    except Exception as e:
+        logging.info("divide by zero error")
+        raise CustomException(e,sys)
